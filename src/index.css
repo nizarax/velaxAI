@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-gray-100;
+    background-image: 
+      linear-gradient(to right, rgba(0, 166, 81, 0.3) 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 166, 81, 0.3) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: center center;
+  }
+}
+
+@layer components {
+  .glow-button {
+    @apply bg-[#00A651] hover:bg-[#00A651]/90 text-white px-6 py-3 rounded-lg font-medium 
+    transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,166,81,0.5)] transform hover:-translate-y-0.5;
+  }
+
+  .card-glow {
+    @apply bg-[#0A1A0F] rounded-xl p-6 border border-[#1A2A1F] hover:border-[#00A651]/30 
+    transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,166,81,0.15)] hover:brightness-105 hover:-translate-y-1;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00A651] to-[#4CAF50];
+  }
+
+  .stats-card {
+    @apply bg-[#0A1A0F]/50 rounded-xl p-8 border border-[#1A2A1F] relative overflow-hidden 
+    hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,166,81,0.2)] 
+    hover:-translate-y-1 scale-110;
+  }
+
+  .feature-card {
+    @apply bg-[#0A1A0F]/50 rounded-xl border border-[#1A2A1F] relative overflow-hidden
+    transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,166,81,0.2)]
+    hover:border-primary/30 hover:brightness-105;
+  }
+
+  .feature-icon-wrapper {
+    @apply relative rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 p-3
+    transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(147,51,234,0.3)];
+  }
+
+  .mouse-glow {
+    @apply pointer-events-none fixed inset-0 z-30 transition-opacity duration-300;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(0, 166, 81, 0.4), transparent 40%);
+  }
+
+  .hero-glow {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[600px];
+    background: radial-gradient(ellipse at 50% 0%, rgba(0, 166, 81, 0.2), transparent 70%);
+  }
+
+  .header-backdrop {
+    @apply fixed top-0 left-0 right-0 z-40;
+    background: transparent;
+  }
+
+  .nav-item {
+    @apply text-gray-300 hover:text-primary transition-colors flex items-center;
+  }
+
+  .logo-text {
+    @apply text-2xl font-bold relative overflow-hidden;
+    animation: shimmer 2.5s linear 1;
+  }
+
+  .logo-text::after {
+    content: '';
+    @apply absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+    animation: shimmer 2.5s linear 1;
+  }
+
+  .stats-graph {
+    @apply h-24 w-full mt-4 relative overflow-hidden;
+  }
+
+  .stats-line {
+    @apply absolute bottom-0 left-0 w-full h-full;
+    background: linear-gradient(to top right, transparent, rgba(0, 166, 81, 0.3));
+    clip-path: polygon(0 100%, 100% 30%, 100% 100%, 0 100%);
+    animation: graphAnimate 2s ease-out forwards;
+  }
+
+  .process-line {
+    @apply absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 to-transparent hidden md:block h-full;
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .process-dot {
+    @apply absolute left-[1.4rem] top-[5.5rem] w-2 h-2 rounded-full bg-primary hidden md:block;
+    box-shadow: 0 0 10px rgba(0, 166, 81, 0.5);
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .feature-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+
+  .cta-button {
+    @apply bg-[#00A651] hover:bg-[#00A651]/90 text-white px-8 py-4 rounded-lg font-medium text-xl
+    transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,166,81,0.5)] transform hover:-translate-y-1
+    relative overflow-hidden;
+  }
+
+  .cta-button::after {
+    content: '';
+    @apply absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+    animation: shine 3s infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes graphAnimate {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  100% { transform: translateX(100%); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
